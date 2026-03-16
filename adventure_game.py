@@ -20,7 +20,7 @@ while True:
     print(f"Weapon LVL: {weapon_lvl} (Dmg: {min_dmg}-{max_dmg})")
     print("="*40)
     
-    selection = input("You are in a cursed desert. Will you [Rest], [Explore], [Eat], [Scavenge], [Upgrade], or [Quit]? ").lower()
+    selection = input("You are in a cursed desert. Will you [Rest], [Explore], [Eat], [Scavenge], [Dungeon], [Upgrade], or [Quit]? ").lower()
 
     if selection == "rest":
         health = min(100, health +10)
@@ -33,6 +33,59 @@ while True:
         print("You ate a scrumchous burger, your hunger has decreased eight points.")
 
 
+    elif selection == "dungeon":
+        print("\n--- ENTERING THE CURSED CAVE ---")
+        confirm = input("It's dangerous inside. Are you sure ? [Yes/No] ").lower()
+        if confirm == "yes":
+            health -= 5
+            hunger += 10
+            
+            event = random.randint(1, 2)
+            if event == 1:
+                print("\n💀 A SKELLY CAME OUT DANCING CUMBIA AND IS READY TO FIGHT !")
+                skelly_hp = 20
+                while skelly_hp > 0 and health > 0:
+                    print(f">> YOUR HP: {health}% SKELLY HP: {skelly_hp}")
+                    action = input("Do you [Slash] or [Dodge]? ").lower()
+
+                    if action == "slash":
+                        damage = random.randint(min_dmg, max_dmg)
+                        skelly_hp -= damage
+                        skelly_hit = random.randint(3, 7)
+                        health -= skelly_hit
+                        print(f"You hit the skelly for {damage}! Skelly hit you for {skelly_hit}!")
+                    elif action == "dodge":
+                        health += 2
+                        print("You danced around his rusty sword and gained 2 HP.")
+                    else:
+                        print(" You were dazed and confused so the skelly hit you ! -8 HP.")
+                        health -= 8
+                if health > 0:
+                    loot = random.randint(10, 30)
+                    bolas += loot
+                    print(f"The skelly has been felled. You found {loot} in his baggie.")
+            
+            else:
+                roll = random.randint(1, 4)
+                if roll == 1:
+                 found_scraps = random.randint(2, 5)
+                 scraps += found_scraps
+                 print(f"You found a hidden armory ! + {found_scraps} scraps.")
+                elif roll == 2:
+                 found_bolas = random.randint(40, 80)
+                 bolas += found_bolas
+                 print(f"You found a golden sarcophagus ! +{found_bolas} bolas.")
+                elif roll == 3:
+                 damage = 20
+                 health -= damage
+                 print(f"You triggered a dart trap ! -{damage} Health.")
+                 print(f"Your health is now {health}%.")
+                else:
+                 print("The cave was empty, but you found a cool rock.")
+        else:
+         print("You changed your mind")
+    
+    
     elif selection == "scavenge":
         roll = random.randint(1, 3)
         if roll == 1:
