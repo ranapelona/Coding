@@ -28,7 +28,7 @@ stats = {
     "weapon_lvl": 1
 }
 if __name__ == "__main__":
-    print("--- CURSED DESERT ADVENTURE ---")
+    print("--- DARK MIRAGE ---")
     choice = input(
         "Do you want to [Load] a saved game or start [New]? ").lower()
     if choice == "load":
